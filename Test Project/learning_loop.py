@@ -108,6 +108,7 @@ print("Total Heads: ", total_heads)
 print("Total Tails: ", total_tails)
 '''
 
+'''
 print("0. Rock")
 print("1. Paper")
 print("2. Scissors")
@@ -134,3 +135,7 @@ elif user_number == 2 and number == 1:
     print("Result: Scissors beat Paper, YOU won")
 else:
     print("Result: TIE")
+'''
+
+number = random.randrange(7, 15)
+print(number)
