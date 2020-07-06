@@ -1,0 +1,42 @@
+print("       +-----------+")
+print("       |           |")
+print("+------++-------+--+-----+")
+print("|       |       |        |")
+print("|       |       |        |")
+print("|       |       |        |")
+print("|       |       |        |")
+print("+-------+       +--------+")
+print("|       |       |        |")
+print("|       |       |        |")
+print("|       |       |        |")
+print("|       |       |        |")
+print("+-------+-------+--------+")
+
+
+print("   +-------------+----------------+")
+print("   |             |   BALCONY      |")
+print("   |             |                |")
+print("   |   LIVING    +--------------+-+----------------+")
+print("   |   ROOM      |              |                  |")
+print("   |             |              |                  |")
+print("   |             |              |     KITCHEN      |")
+print("   |             |              |                  |")
+print("   |             |              |                  |")
+print("   |             |              |                  |")
+print("+--+-------------+              +------------------+")
+print("|                |     HALL     |                  |")
+print("|                |              |                  |")
+print("|                |              |                  |")
+print("|     BEDROOM    |              |  DINING ROOM     |")
+print("|                |              |                  |")
+print("|                |              |                  |")
+print("|                |              |                  |")
+print("|                |              |                  |")
+print("+----------------+--------------+------------------+")
+
+
+            if (room_list[current_room][5] is True):
+                if room_list[current_room]
+                print(room_item_list)
+            else:
+                print("The lights are off.")
