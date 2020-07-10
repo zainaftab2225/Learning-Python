@@ -19,6 +19,23 @@ class Block(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
+    def reset_pos(self):
+        self.rect.y = random.randrange(-100, -20)
+        self.rect.x = random.randrange(700-20)
+
+    def update(self):
+        self.rect.y += 1
+        if self.rect.y > 500+15:
+            self.reset_pos()
+            print("gone")
+
+
+class Player(Block):
+    def update(self):
+        mouse_position = pygame.mouse.get_pos()
+        self.rect.x = mouse_position[0]
+        self.rect.y = mouse_position[1]
+
 
 def main():
     """ Main function for the game. """
@@ -41,7 +58,7 @@ def main():
         block_list.add(block)
         all_sprites_list.add(block)
 
-    player = Block(RED, 30, 30)
+    player = Player(RED, 30, 30)
     all_sprites_list.add(player)
     score = 0
     # Loop until the user clicks the close button.
@@ -56,16 +73,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-        mouse_position = pygame.mouse.get_pos()
-        player.rect.x = mouse_position[0]
-        player.rect.y = mouse_position[1]
-        # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
 
+        # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
+        all_sprites_list.update()
         # ALL GAME LOGIC SHOULD GO BELOW THIS COMMENT
-        block_hit_list = pygame.sprite.spritecollide(player, block_list, True)
+        block_hit_list = pygame.sprite.spritecollide(player, block_list, False)
         for block in block_hit_list:
             score += 1
             print(score)
+            block.reset_pos()
+
         # ALL GAME LOGIC SHOULD GO ABOVE THIS COMMENT
 
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
@@ -79,7 +96,7 @@ def main():
         pygame.display.flip()
 
         # Limit to 60 frames per second
-        clock.tick(60)
+        clock.tick(20)
 
     # Close the window and quit.
     # If you forget this line, the program will 'hang'
