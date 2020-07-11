@@ -138,7 +138,7 @@ class Game():
         self.all_sprites_list.add(self.player)
 
         self.collect_green_sound = pygame.mixer.Sound("coin7.wav")
-        self.collect_red_sound = pygame.mixer.Sound("Coin10.wav")
+        self.collect_red_sound = pygame.mixer.Sound("coin10.wav")
 
         for i in range(20):
             self.block = Block(GREEN, 20, 20)
