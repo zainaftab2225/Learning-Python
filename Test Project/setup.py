@@ -1,8 +1,10 @@
 import cx_Freeze
 
-executables = [cx_Freeze.Executalbe("sprite_game.py")]
+executables = [cx_Freeze.Executable("sprite_game.py")]
 
 cx_Freeze.setup(
-    name="Sprite Game"
+    name="Sprite Game",
+    options={"build.exe": {"packages": ["pygame"], "included_files": []}},
+    executables=executables
 
 )
