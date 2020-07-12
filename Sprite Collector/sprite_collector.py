@@ -134,6 +134,7 @@ class Game():
     # Initializes score and Game Over flag
     def __init__(self):
         self.game_over_flag = False
+        self.transition = False
         self.player = Player(100, 290)
         self.level_list = []
         self.level_list.append(Level00(self.player))
@@ -156,32 +157,34 @@ class Game():
                 return True
             # Set the speed based on the key pressed
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.player.change_speed(-5, 0)
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.player.change_speed(5, 0)
-                elif event.key == pygame.K_UP:
+                elif event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.player.change_speed(0, -5)
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     self.player.change_speed(0, 5)
-                elif event.key == pygame.K_SPACE and self.game_over_flag is True:
-                    self.__init__()
+                elif event.key == pygame.K_SPACE:
+                    if self.game_over_flag is True:
+                        self.__init__()
+                    if self.transition is True:
+                        self.transition = False
             # Reset speed when key goes up
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.player.change_speed(5, 0)
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.player.change_speed(-5, 0)
-                elif event.key == pygame.K_UP:
+                elif event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.player.change_speed(0, 5)
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     self.player.change_speed(0, -5)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.game_over_flag is True:
                     self.__init__()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.game_over_flag is True:
-                    self.__init__()
+                if self.transition is True:
+                    self.transition = False
         return False
 
     # Run Game Logic
@@ -190,12 +193,13 @@ class Game():
     # Whenever there is a collision, remove the block from the block_list
     # When all blocks removed, set game_over_flag as True
     def run_logic(self):
-        if self.game_over_flag is False:
+        if self.game_over_flag is False and self.transition is False:
             self.i = 0
             self.current_level.update()
             if self.player.level == GAME_END:
                 self.game_over_flag = True
             elif self.player.level > self.current_level_no:
+                self.transition = True
                 self.current_level_no = self.player.level
                 self.current_level = self.level_list[self.current_level_no]
         if self.player.lives == 0:
@@ -211,8 +215,13 @@ class Game():
             self.x = (SCREEN_WIDTH//2) - (self.text.get_width() // 2)
             self.y = (SCREEN_HEIGHT//2) - (self.text.get_height() // 2)
             screen.blit(self.text, [self.x, self.y])
-
-        if not self.game_over_flag:
+        if self.transition:
+            self.font = pygame.font.SysFont("serif", 25)
+            self.text = self.font.render("TRANSITIOn", True, BLACK)
+            self.x = (SCREEN_WIDTH//2) - (self.text.get_width() // 2)
+            self.y = (SCREEN_HEIGHT//2) - (self.text.get_height() // 2)
+            screen.blit(self.text, [self.x, self.y])
+        if not self.game_over_flag and not self.transition:
             self.current_level.draw(screen)
 
         pygame.display.flip()
