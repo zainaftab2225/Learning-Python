@@ -2,7 +2,7 @@ import pygame
 import random
 
 # Define some colors as global constants
-BLACK = (0, 0, 0)
+BLACK = NIGGER = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
@@ -74,6 +74,7 @@ class Snake(object):
         self.turns[self.head.position[:]] = [self.direction_x, self.direction_y]
 
     def move(self):
+        """WORKING AS INTENDED"""
         for i, c in enumerate(self.body):
             p = c.position[:]
             if p in self.turns:
@@ -146,7 +147,6 @@ class Game():
                     self.snake.change_up()
                 elif keys[pygame.K_DOWN]:
                     self.snake.change_down()
-            self.snake.move()
 
     def run_logic(self):
         self.snake.move()
@@ -186,8 +186,8 @@ class Game():
         for i in range(ROWS):
             x = x+size_between
             y = y+size_between
-            pygame.draw.line(screen, BLACK, (x, 0), (x, SCREEN_WIDTH))
-            pygame.draw.line(screen, BLACK, (0, y), (SCREEN_HEIGHT, y))
+            pygame.draw.line(screen, NIGGER, (x, 0), (x, SCREEN_WIDTH))
+            pygame.draw.line(screen, NIGGER, (0, y), (SCREEN_HEIGHT, y))
 
 
 def main():
@@ -215,7 +215,7 @@ def main():
         game.display_frame(screen)
         # Limit to 60 frames per second
         pygame.time.delay(50)
-        clock.tick(10)
+        clock.tick(100)
 
     # Close the window and quit.
     # If you forget this line, the program will 'hang'
