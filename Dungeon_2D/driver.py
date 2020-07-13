@@ -167,6 +167,7 @@ class Player(pygame.sprite.Sprite):
                 # Otherwise if we are moving left, do the opposite.
                 self.rect.left = block.rect.right
 
+
         door_hit_list = pygame.sprite.spritecollide(self, self.doors, False)
         for door in door_hit_list:
             # If we are moving right, set our right side to the left side of
@@ -244,7 +245,7 @@ class Game():
             self.all_sprites_list.add(wall)
             final_wall_list.add(wall)
 
-        for i in range(0, SCREEN_WIDTH//2-32, 32):
+        for i in range(0, SCREEN_WIDTH//2-32,32):
             wall = Wall("top")
             wall.set_wall_attributes(i, 192)
             self.all_sprites_list.add(wall)
